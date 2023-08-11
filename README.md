@@ -1,2 +1,2 @@
 # FinalYearProject
-Our final year project
+The most exciting project of the Year. Stay tuned!
