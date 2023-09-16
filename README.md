@@ -1,2 +1,2 @@
-# FinalYearProject
-The most exciting project of the Year. Stay tuned!
+# 4BIT
+A tool designed to diagnose Lung cancer with the help of multi-omics data.
