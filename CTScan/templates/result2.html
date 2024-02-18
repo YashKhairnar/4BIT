@@ -4,7 +4,7 @@
     <title>My Plots</title>
     <link rel="stylesheet" href="{{url_for('static',filename='css/base.css')}}">
 </head>
-<body>
+<body style = "background-color: skyblue;">
     <header class="nav">
         <a href="#" id="icon"><img src="{{url_for('static' , filename='images/iconlung.png')}}"></a>
         <ul class="navlinks">
@@ -14,12 +14,17 @@
             <li><a href="{{ url_for('about') }}">About</a></li>
         </ul>
     </header>
-    <div class = "results-container">
-        <img src="{{imagepath}}" alt = "input_image">
+    <div class = "ctscan-results-container" style = "display : flex; flex-direction: column; justify-content: space-between; align-items: center;margin-top : 50px;background-color: skyblue;">
+        <div class = "input-image-result" style = "display : flex; flex-direction: row; justify-content: space-evenly; align-items: center;">
+            <img src="{{imagepath}}" alt = "input_image">
+            <h1 style = "margin-left : 100px;">Result : {{result}}</h1>
+        </div>
         <img src="{{url_for('static' , filename='images/confusion_matrix.png')}}" alt="Confusion Matrix">
-        <img src="{{url_for('static' , filename='images/model_loss.png')}}" alt="Model Loss">
-        <img src="{{url_for('static' , filename='images/model_accuracy.png')}}" alt="Model Accuracy">
-        <h1>Result : {{result}}</h1>
+        <div class = "mode-loss-accuracy" style = "display : flex; flex-direction: row; justify-content: space-around; align-items: center;">
+            <img src="{{url_for('static' , filename='images/model_loss.png')}}" alt="Model Loss">
+            <img src="{{url_for('static' , filename='images/model_accuracy.png')}}" alt="Model Accuracy">
+        </div>
+        
     </div>
 </body>
 </html>
