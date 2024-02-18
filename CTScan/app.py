@@ -95,11 +95,72 @@ def image():
 
     return render_template('result2.html' , result = result , imagepath = image_path)
 
-@app.route('/upload_metabolite_data' , methods=['GET', 'POST'])
-def metabolite() : 
+@app.route('/metaboliteanalysis' , methods=['GET', 'POST'])
+def metaboliteanalysis() : 
     model = pickle.load(open("D:\GitHub\\4BIT\metabolites\models\plasma_ridge_model.pkl", "rb"))
+    return render_template('metabolite_analysis.html')
     
 
+@app.route('/upload_metabolite_data' , methods=['GET', 'POST'])
+def metabolite() : 
+    print('inside upload metabolite data')
+    data = request.form
+    print('data : ', data)
+    keys = data.keys()
+    print()
+    print()
+    print('keys : ' , keys)
+
+    print('iteratinf over dict : ')
+    plasma_list = []
+    serum_list = []
+    flag = 0
+    for key, value in data.items() : 
+        if "plasma_" in key : 
+            plasma_list.append(value)
+        elif "serum_" in key : 
+            serum_list.append(value)
+    
+
+    
+    print()
+    print()
+    plasma_list = [item if item != '' else '0' for item in plasma_list]
+    serum_list = [item if item != '' else '0' for item in serum_list]
+    print('plasma_list : ' , plasma_list)
+    print('serum_list : ' , serum_list)
+    
+    
+    plasma_list = np.asarray(plasma_list , dtype=float)
+    serum_list = np.asarray(serum_list , dtype = float)
+
+    # Cancer detection from plasma
+    plasma_ridge_model = pickle.load(open("D:\GitHub\\4BIT\metabolites\models\plasma_ridge_model.pkl", "rb"))
+    print('model : ' , plasma_ridge_model)
+    plasma_list = plasma_list.reshape(1,-1)
+    plasma_pred = plasma_ridge_model.predict(plasma_list)
+    print()
+    print()
+    print('plasma_pred : ' , plasma_pred)\
+    
+    # Cancer detection from Serum
+    serum__xgb_classifier = pickle.load(open("D:\GitHub\\4BIT\metabolites\models\serum_xgb_classifier.pkl", "rb"))
+    print('xgb model : ' , serum__xgb_classifier)
+    serum_list = serum_list.reshape(1,-1)
+    serum_pred = serum__xgb_classifier.predict(serum_list)
+    print()
+    print()
+    print('serum pred : ',  serum_pred)
+
+    cancer_exists = "No"
+    if(serum_pred[0] or plasma_pred[0] == 1) : 
+        # lung cancer exists
+        cancer_exists = "Yes"
+    
+
+
+
+    return render_template('metabolite_analysis.html' , cancer_exists = cancer_exists)
 
 
 if __name__ == '__main__':

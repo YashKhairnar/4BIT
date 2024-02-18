@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{url_for('static',filename='css/predictive analysis.css')}}">
+        <link rel="stylesheet" href="{{url_for('static',filename='css/base.css')}}">
+        <script src="{{url_for('static',filename='css/preview.js')}}"></script>
+
+    </head>
+    <body>
+        <header class="nav">
+            <a href="#" id="icon"><img src="/static/images/iconlung.png"></a>
+            <ul class="navlinks">
+                <li><a href="{{ url_for('base') }}">Home</a></li>
+                <li><a href="{{ url_for('predictiveanalysis') }}">Predictive Analysis</a></li>
+                <li><a href="{{ url_for('metaboliteanalysis') }}">Metabolite Analysis</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+            </ul>
+        </header>
+        <div class="table-container" style = "margin-top : 20px; height : 1000px; width : 100%">        
+            
+            <div class = "column-left" style = "background-color : skyblue ;height : 1200px; width : 100%; overflow-y: scroll; margin-top : -20px;">
+                <!-- display the table here -->
+                <form action="{{ url_for('metabolite') }}" method="POST" style = "display : flex; flex-direction: column; justify-content: space-between;align-items: center; margin-top : 50px;">
+                    <div class = "table-container-2" style = "display : flex; flex-direction : row; justify-content: space-between; align-items: center;">
+                    <table style = "border : 1px solid black;">
+                        <tr style = "border : 1px solid black;">
+                            <th style = "border : 1px solid black;">Sr.no</th>
+                            <th style = "border : 1px solid black;">Plasma Metabolite Name</th>
+                            <th style = "border : 1px solid black;">Concentration in counts</th>
+                        </tr>
+                        <script>
+                            plasma_list = ['asparagine',
+                            'benzoic acid',
+                            'tryptophan',
+                            'uric acid',
+                            '5-hydroxynorvaline NIST',
+                            'alpha-ketoglutarate',
+                            'citrulline',
+                            'glutamine',
+                            'hypoxanthine',
+                            'malic acid',
+                            'methionine sulfoxide',
+                            'nornicotine',
+                            'octadecanol',
+                            '3-phosphoglycerate',
+                            '5-methoxytryptamine',
+                            'adenosine-5-monophosphate',
+                            'aspartic acid',
+                            'lactic acid',
+                            'maltose',
+                            'maltotriose',
+                            'N-methylalanine',
+                            'phenol',
+                            'phosphoethanolamine',
+                            'pyrophosphate',
+                            'pyruvic acid',
+                            'taurine']
+                            for (let i = 0; i < 26; i++) {
+                                // Create a new row every 3 columns
+                                document.write(`<td style = "width : 100px; border : 1px solid black;">${i+1}</td>`);
+                                document.write(`<td style = "width : 500px; border : 1px solid black;"">${plasma_list[i]}</td>`);
+                                document.write(`<td><input type= "number" style = "border : 1px solid black;" placeholder = "0" name = "plasma_${plasma_list[i]}"}></td>`);
+                                document.write(`<tr><tr>`);
+                            }
+                        </script>
+                    </table>
+                    <table style = "border : 1px solid black; margin-left : 100px;">
+                        <tr style = "border : 1px solid black;">
+                            <th style = "border : 1px solid black;">Sr.no</th>
+                            <th style = "border : 1px solid black;">Serum Metabolite Name</th>
+                            <th style = "border : 1px solid black;">Concentration in counts</th>
+                        </tr>
+                        <script>
+                            serum_list = ['cholesterol',
+                                'lactic acid',
+                                'N-methylalanine',
+                                'phenylalanine',
+                                'aspartic acid',
+                                'deoxypentitol',
+                                'glutamic acid',
+                                'malic acid',
+                                'phenol',
+                                'taurine']
+                            for (let i = 0; i < 10; i++) {
+                                // Create a new row every 3 columns
+                                document.write(`<td style = "width : 100px; border : 1px solid black;">${i+1}</td>`);
+                                document.write(`<td style = "width : 500px; border : 1px solid black;"">${serum_list[i]}</td>`);
+                                document.write(`<td><input type= "number" style = "border : 1px solid black;" placeholder = "0" name = "serum_${serum_list[i]}"}></td>`);
+                                document.write(`<tr><tr>`);
+                            }
+                        </script>
+                    </table>
+                    </div>
+                <input type = "submit" value = "Submit Metabolites data" style="margin-top : 50px; height : 50px; width : 250px; border-radius: 5px; background-color: skyblue; font-size : 18px;" >
+            </form>
+            </div>
+            
+                     
+        </div>
+        <script>
+            let slideIndex = 1;
+            showSlides(slideIndex);
+            
+            function plusSlides(n) {
+              showSlides(slideIndex += n);
+            }
+            
+            function currentSlide(n) {
+              showSlides(slideIndex = n);
+            }
+            
+            function showSlides(n) {
+              let i;
+              let slides = document.getElementsByClassName("mySlides");
+              let dots = document.getElementsByClassName("dot");
+              if (n > slides.length) {slideIndex = 1}    
+              if (n < 1) {slideIndex = slides.length}
+              for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+              }
+              for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+              }
+              slides[slideIndex-1].style.display = "block";  
+              dots[slideIndex-1].className += " active";
+            }
+            
+  
+
+            </script>
+            
+    </body>
+    
+</html>
