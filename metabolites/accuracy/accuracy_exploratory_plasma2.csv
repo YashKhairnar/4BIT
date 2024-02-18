@@ -1,8 +1,8 @@
 Processed Dataset,Accuracy
-Plasma(Exploratory),0.890166083916084
-pca2_plasma(Exploratory),0.8197163947163947
+Plasma(Exploratory),0.8846105283605284
+pca2_plasma(Exploratory),0.8141608391608391
 pca3_plasma(Exploratory),0.8393550893550893
-pca4_plasma(Exploratory),0.8244405594405594
+pca4_plasma(Exploratory),0.8237461149961149
 pca5_plasma(Exploratory),0.8438422688422689
-tsne2_plasma(Exploratory),0.7930167055167056
-tsne3_plasma(Exploratory),0.7619706682206682
+tsne2_plasma(Exploratory),0.7819638694638694
+tsne3_plasma(Exploratory),0.7571474358974359

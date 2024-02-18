@@ -95,6 +95,11 @@ def image():
 
     return render_template('result2.html' , result = result , imagepath = image_path)
 
+@app.route('/upload_metabolite_data' , methods=['GET', 'POST'])
+def metabolite() : 
+    model = pickle.load(open("D:\GitHub\\4BIT\metabolites\models\plasma_ridge_model.pkl", "rb"))
+    
+
 
 
 if __name__ == '__main__':
