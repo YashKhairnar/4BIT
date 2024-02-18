@@ -7,6 +7,10 @@
     background-size: cover;
     min-height: 100vh;
 }
+
+.nav{
+    background-color: gray;
+}
 header{
     display: flex;
     justify-content: space-around;

@@ -8,7 +8,7 @@
     </head>
     <body>
         <header class="nav">
-            <a href="#" id="icon"><img src="{{url_for('static',filename='image/iconlung.png')}}"></a>
+            <a href="#" id="icon"><img src="/static/images/iconlung.png"></a>
             <ul class="navlinks">
                 <li><a href="{{ url_for('base') }}">Home</a></li>
                 <li><a href="{{ url_for('predictiveanalysis') }}">Predictive Analysis</a></li>
@@ -29,29 +29,29 @@
                     <img id="image-preview" style="max-width:200px;max-height:200px;" />
                     </div>
                     <div class="submit">
-                    <button class="btn-submit"><img src="{{url_for('static',filename='image/submit.png')}}">Generate Result</button>
+                    <button class="btn-submit"><img src="/static/images/submit.png">Generate Result</button>
                     </div>
                   </form>
                 
             </div>
         
-            <div class="column right" >
+            <div class="column right">
                 <div class="slideshow-container">
 
                     <div class="mySlides fade">
                       <div class="numbertext">1 / 2</div>
-                      <img src="{{url_for('static',filename='image/symp1.jpg')}}" >
+                      <img src="{{url_for('static' , filename='images/symp1.jpg')}}" >
                       
                     </div>
                     
                     <div class="mySlides fade">
                       <div class="numbertext">2 / 2</div>
-                      <img src="{{url_for('static',filename='image/symp2.jpg')}}" >
+                      <img src="{{url_for('static' , filename='images/symp2.jpg')}}" >
                       
                     </div>
                     <div class="mySlides fade">
                         <div class="numbertext">3 / 3</div>
-                        <img src="{{url_for('static',filename='image/symp3.jpg')}}" >
+                        <img src="{{url_for('static' , filename='images/symp3.jpg')}}" >
                         
                     </div>
                       

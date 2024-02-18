@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Plots</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/base.css')}}">
+</head>
+<body>
+    <header class="nav">
+        <a href="#" id="icon"><img src="{{url_for('static' , filename='images/iconlung.png')}}"></a>
+        <ul class="navlinks">
+            <li><a href="{{ url_for('base') }}">Home</a></li>
+            <li><a href="{{ url_for('predictiveanalysis') }}">Predictive Analysis</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+        </ul>
+    </header>
+    <div class = "results-container">
+        <img src="{{imagepath}}" alt = "input_image">
+        <img src="{{url_for('static' , filename='images/confusion_matrix.png')}}" alt="Confusion Matrix">
+        <img src="{{url_for('static' , filename='images/model_loss.png')}}" alt="Model Loss">
+        <img src="{{url_for('static' , filename='images/model_accuracy.png')}}" alt="Model Accuracy">
+        <h1>Result : {{result}}</h1>
+    </div>
+</body>
+</html>

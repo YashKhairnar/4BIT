@@ -16,6 +16,8 @@ print(model.summary())
 #print(model.evaluate(np_img))
 
 image = cv2.imread('D:\GitHub\\4BIT\CTScan\Dataset2\\test\Malignant case (3).jpg')
+numpydata = np.asarray(image)
+print('numpydata : ' , numpydata.shape)
 resized_image = cv2.resize(image , (224 , 224))
 input_image = np.expand_dims(resized_image, axis =0)
 prediction = model.predict(input_image)
