@@ -1,2 +1,5 @@
 ./myenv
 myenv
+CTScan/Lung_Model.h5
+CTScan/cnn_model.h5
+CTScan/cnn_classifier.pkl

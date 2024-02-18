@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{url_for('static',filename='css/predictive analysis.css')}}">
+        <link rel="stylesheet" href="{{url_for('static',filename='css/base.css')}}">
+        <script src="{{url_for('static',filename='css/preview.js')}}"></script>
+
+    </head>
+    <body>
+        <header class="nav">
+            <a href="#" id="icon"><img src="{{url_for('static',filename='image/iconlung.png')}}"></a>
+            <ul class="navlinks">
+                <li><a href="{{ url_for('base') }}">Home</a></li>
+                <li><a href="{{ url_for('predictiveanalysis') }}">Predictive Analysis</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+            </ul>
+        </header>
+        <div class="both-rows" >
+
+            <div class="column left" style="background-color: #6b4a8c;">
+                <h2>LUNG CANCER DETECTION</h2>
+                <h4>UPLOAD THE LUNG CT IMAGES AND PREDICT THE RESULT</h4>
+                
+                  <form action="/upload" method="post" enctype="multipart/form-data">
+                    <div class="buttonwrap">
+                    <!--<button class="btn"><img src="{{url_for('static',filename='image/upload.png')}}">Upload</button>-->
+                    <input type="file"  class="file" id="file-input" name="myfile" onchange="previewImage(event);" />
+                    <br><br>
+                    <img id="image-preview" style="max-width:200px;max-height:200px;" />
+                    </div>
+                    <div class="submit">
+                    <button class="btn-submit"><img src="{{url_for('static',filename='image/submit.png')}}">Generate Result</button>
+                    </div>
+                  </form>
+                
+            </div>
+        
+            <div class="column right" >
+                <div class="slideshow-container">
+
+                    <div class="mySlides fade">
+                      <div class="numbertext">1 / 2</div>
+                      <img src="{{url_for('static',filename='image/symp1.jpg')}}" >
+                      
+                    </div>
+                    
+                    <div class="mySlides fade">
+                      <div class="numbertext">2 / 2</div>
+                      <img src="{{url_for('static',filename='image/symp2.jpg')}}" >
+                      
+                    </div>
+                    <div class="mySlides fade">
+                        <div class="numbertext">3 / 3</div>
+                        <img src="{{url_for('static',filename='image/symp3.jpg')}}" >
+                        
+                    </div>
+                      
+                    <a class="prev" onclick="plusSlides(-1)">❮</a>
+                    <a class="next" onclick="plusSlides(1)">❯</a>
+                    <div style="text-align:center">
+                        <span class="dot" onclick="currentSlide(1)"></span> 
+                        <span class="dot" onclick="currentSlide(2)"></span> 
+                        <span class="dot" onclick="currentSlide(3)"></span> 
+                    </div>
+                      
+
+                </div>    
+            </div>
+            
+          
+        </div>
+        <script>
+            let slideIndex = 1;
+            showSlides(slideIndex);
+            
+            function plusSlides(n) {
+              showSlides(slideIndex += n);
+            }
+            
+            function currentSlide(n) {
+              showSlides(slideIndex = n);
+            }
+            
+            function showSlides(n) {
+              let i;
+              let slides = document.getElementsByClassName("mySlides");
+              let dots = document.getElementsByClassName("dot");
+              if (n > slides.length) {slideIndex = 1}    
+              if (n < 1) {slideIndex = slides.length}
+              for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+              }
+              for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+              }
+              slides[slideIndex-1].style.display = "block";  
+              dots[slideIndex-1].className += " active";
+            }
+            
+    function previewImage(event) {
+      var reader = new FileReader();
+      reader.onload = function() {
+        var output = document.getElementById('image-preview');
+        output.src = reader.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  
+
+            </script>
+            
+    </body>
+    
+</html>

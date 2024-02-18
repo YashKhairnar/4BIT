@@ -1,0 +1,96 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.lung{
+    background-image: url('/static/image/lungs.jpg');
+    background-size: cover;
+    min-height: 100vh;
+}
+header{
+    display: flex;
+    justify-content: space-around;
+    padding: 3% 6%;
+}
+.nav img{
+    width: 125px;
+
+}
+.navlinks{
+    flex: 1;
+    text-align: right;
+    
+}
+.navlinks li{
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
+    bottom: 0;
+    
+}
+.navlinks li a{
+    text-decoration: none;
+    color: black;
+    
+    font-size: 20px;
+}
+.navlinks ul li::after{
+    content: '';
+    width: 0;
+    height: 2px;
+    background: black;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+.navlinks ul li:hover::after{
+    width: 100%;
+}
+header img{
+    max-width: 40%;
+}
+.content{
+    display: flex;
+    position: absolute;
+    left: 6%;
+    top: 30%;
+}
+.content .button{
+    
+    background-color:#7345a1 ;
+    color: white;
+    border: 5px solid #7345a1 ;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 15px;
+    padding: 4px;
+    margin-top: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+.textarea a{
+    margin-top: 3%;
+}
+.textarea h2{
+    font-size: 68px;
+    font-weight: 500;
+}
+.textarea p{
+    font-size:18px;
+    margin-top: 8px;
+    
+}
+.img1 img{
+    width: 30px;
+    margin-right: 10px;
+}
+.img2 img{
+    margin-top: 5%;
+    width: 30px;
+}
+.button a{
+    text-decoration: none;
+    color: white;
+}

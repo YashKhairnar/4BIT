@@ -1,0 +1,166 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.both-rows{
+    margin-left: 70px;
+}
+.column{
+    float: left;
+    
+    margin-right: 30px;
+    min-height: 70vh;
+}
+.left{
+    width:35% ;
+    border-radius: 30px;
+    position: fixed;
+    
+}
+.left h2{
+    color: #ddb6f0;
+    text-align: center;
+    padding: 20px;
+    
+}
+.left h4{
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin: 0;
+    
+}
+.buttonwrap {
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+    text-align: center;
+    
+    
+}
+  
+.btn {
+    border: 2px solid white;
+    color: black;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+    
+    
+}
+.btn img{
+    width: 15px;
+}
+.submit{
+    position: absolute;
+    bottom: 10px;
+    padding: 10px;
+}
+.btn-submit{
+    border: 2px solid white;
+    color: black;
+    background-color: white;
+    padding: 6px 50px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-flex;
+    position: absolute;
+    bottom: 50px;
+    left: 150px;
+    cursor: pointer;
+}
+.btn-submit img{
+    width: 25px;
+}
+  
+.upload-btn-wrapper input[type=file] {
+    font-size: 70px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+.right{
+    width:55%;
+    border-radius: 30px;
+    position: relative;
+    margin-left: 600px;
+    margin-right: 10px;
+}
+.slideshow-container {
+    padding: 10px;
+    min-height: 70vh;
+    position: relative;
+    border-radius: 5px;
+    
+    
+  }
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+.mySlides img{
+    width:100%
+}
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+  
+  .active, .dot:hover {
+    background-color: #717171;
+  }
+  
+  
+  
+  
+  
+  
+    

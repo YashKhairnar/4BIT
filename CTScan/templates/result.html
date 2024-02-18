@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Plots</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/base.css')}}">
+</head>
+<body>
+    <header class="nav">
+        <a href="#" id="icon"><img src="{{url_for('static',filename='image/iconlung.png')}}"></a>
+        <ul class="navlinks">
+            <li><a href="{{ url_for('base') }}">Home</a></li>
+            <li><a href="{{ url_for('predictiveanalysis') }}">Predictive Analysis</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+        </ul>
+    </header>
+    <img src="{{ 'data:image/png;base64,'+plot_data1 }}" alt="Plot 1">
+    <img src="{{ 'data:image/png;base64,'+plot_data2 }}" alt="Plot 2">
+</body>
+</html>

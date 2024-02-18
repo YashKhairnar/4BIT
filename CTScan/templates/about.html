@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Lung Cancer Detection Website</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/about.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/base.css')}}">
+   
+</head>
+<body>
+ <section class="container">
+    <header class="nav">
+        <a href="#" id="icon"><img src="{{url_for('static',filename='image/iconlung.png')}}"></a>
+        <ul class="navlinks">
+            <li><a href="{{ url_for('base') }}">Home</a></li>
+            <li><a href="{{ url_for('predictiveanalysis') }}">Predictive Analysis</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+        </ul>
+    </header>
+    <h1>About Us</h1>
+    <p>Welcome to our Automated Lung Cancer Detection System! Our goal is to help detect lung cancer early,when it is most treatable.<br>
+       We believe that by increasing awareness about lung cancer and providing an easy-to-use tool for detecting the disease, we can <br>
+       help save lives.Lung cancer is a type of cancer that starts in the lungs. It usually develops in the cells that line the air passages.<br> 
+       Lung cancer is the leading cause of cancer death in the United States and around the world. Smoking is the primary cause of<br>
+       lung cancer, but other factors can also increase the risk of developing the disease.</p>
+
+    
+    <h2>How It Works</h2>
+    <p>Our website uses a CT Image of your lung, symptoms, and generate a results. The result can help you determine whether you should seek<br>
+       further medical attention.We take accuracy and reliability very seriously. Our results has been extensively validated using large datasets,<br> 
+       and its ability to accurately assess your risk for lung cancer is the best.</p>
+
+    <h2>Privacy and Security</h2>
+    <p>We are committed to protecting your privacy and keeping your personal information confidential. We do not share your information with <br>
+       third parties without your consent.</p>
+
+    <h2>Our Mission</h2>
+    <p>Our mission is to increase awareness about lung cancer and provide an easy-to-use tool for detecting the disease early. We believe that<br>
+       early detection is key to improving survival rates and reducing the impact of lung cancer on individuals and families.We encourage you to <br>
+       use our website to assess your risk for lung cancer and take action to prevent the disease. Remember that early detection is key to improving <br>
+       survival rates, so don't hesitate to talk to your doctor if you have any concerns about your lung health.</p>
+
+    <h2>Our Team</h2>
+    <p>Our team is made up of doctors, researchers, and developers who are passionate about improving lung cancer detection. We have worked<br> 
+      together to develop a reliable and accurate risk assessment tool for lung cancer.</p>
+</section>
+    <div class="footer">
+      <div class="col-1">
+      <h2>CONTACT US</h2>
+      <p>contact us at <a href="mailto:contact@lungcancerdetection.com">mailto:contact@lungcancerdetection.com</a><br>
+         call us at 1-800-LUNG-CANCER<br></p>
+      </div>
+      <div class="col-2">
+         <form>
+            <input type="text" placeholder="enter your email address" required>
+            <br>
+            <button type="submit">SUSCRIBE</button>
+            </form>
+      </div>
+      <div class="col-3">
+        <h3>Address</h3> 
+        <p></p>123,ABC,kerala</p> 
+      </div>
+      
+    </div>
+</body>
+</html>

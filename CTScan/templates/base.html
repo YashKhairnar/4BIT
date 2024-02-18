@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Automated Lung Cancer Detection</title>
+        <meta name="viewport" content="width=device-width ,intial-scale=1">
+        <link rel="stylesheet" href="{{url_for('static',filename='css/base.css')}}">
+    </head>
+    <body>
+        <section class="lung">
+            <header class="nav">
+                <a href="#" id="icon"><img src="{{url_for('static',filename='image/iconlung.png')}}"></a>
+                <ul class="navlinks">
+                    <li><a href="{{ url_for('base') }}">Home</a></li>
+                    <li><a href="{{ url_for('predictiveanalysis') }}">Predictive Analysis</a></li>
+                    <li><a href="{{ url_for('about') }}">About</a></li>
+                </ul>
+            </header>
+            <div class="content">
+                <div class="textarea">
+                    <h2>LUNG CANCER</h2>
+                    <p>Every breath is a gift, but with lung cancer, each one becomes a precious commodity. The battle against this<br>disease is not just a fight for survival, but a struggle for the very essence of life itself. It requires strength,<br>courage, and an unwavering determination to never give up. But even in the darkest moments, there is hope.<br>With advances in research and treatment, more people are living longer and healthier lives after a diagnosis<br>of lung cancer. Together, we can continue to push forward and turn the tide against this devastating illness</p>
+                    <br>
+                    
+                    <h3>Early Detection</h3>
+                    <p>Early diagnosis of symptomatic cancers is relevant in all settings and the majority of cancers.<br> 
+                        Cancer programmes should be designed to reduce delays in, and barriers to, diagnosis,<br>
+                         treatment and supportive care.</p>
+                    <button class="button"><a href="https://www.iarc.who.int/cancer-type/lung-cancer/">LEARN MORE</a></button><br>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
