@@ -34,6 +34,7 @@ grpcio==1.60.1
 h5py==3.10.0
 html2image==2.0.4.3
 idna==3.6
+imgkit==1.2.3
 ipykernel==6.29.2
 ipython==8.21.0
 itsdangerous==2.1.2
@@ -117,3 +118,4 @@ Werkzeug==3.0.1
 wrapt==1.14.1
 xgboost==2.0.3
 yarl==1.9.4
+yellowbrick==1.5
