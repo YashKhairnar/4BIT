@@ -156,11 +156,8 @@ def metabolite() :
     if(serum_pred[0] or plasma_pred[0] == 1) : 
         # lung cancer exists
         cancer_exists = "Yes"
-    
 
-
-
-    return render_template('metabolite_analysis.html' , cancer_exists = cancer_exists)
+    return render_template('metabolite_results.html' , cancer_exists = cancer_exists)
 
 
 if __name__ == '__main__':
