@@ -83,11 +83,11 @@ def image():
     pred = np.argmax(prediction, axis=1) #pick class with highest  probability
     print("pred : " , pred)
     result = ""
-    if(prediction[0][0]==1) : 
+    if(pred[0]==0) : 
         result = "Malignant"
-    elif(prediction[0][1]==1) : 
+    elif(pred[0]==1) : 
         result = "Normal"
-    elif(prediction[0][2]==1) : 
+    elif(pred[0]==2) : 
         result = "Benign"
 
     print('Result : ' , result)
