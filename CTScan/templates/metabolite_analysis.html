@@ -28,41 +28,13 @@
                             <th style = "border : 1px solid black;">Plasma Metabolite Name</th>
                             <th style = "border : 1px solid black;">Concentration in counts</th>
                         </tr>
-                        <script>
-                            plasma_list = ['asparagine',
-                            'benzoic acid',
-                            'tryptophan',
-                            'uric acid',
-                            '5-hydroxynorvaline NIST',
-                            'alpha-ketoglutarate',
-                            'citrulline',
-                            'glutamine',
-                            'hypoxanthine',
-                            'malic acid',
-                            'methionine sulfoxide',
-                            'nornicotine',
-                            'octadecanol',
-                            '3-phosphoglycerate',
-                            '5-methoxytryptamine',
-                            'adenosine-5-monophosphate',
-                            'aspartic acid',
-                            'lactic acid',
-                            'maltose',
-                            'maltotriose',
-                            'N-methylalanine',
-                            'phenol',
-                            'phosphoethanolamine',
-                            'pyrophosphate',
-                            'pyruvic acid',
-                            'taurine']
-                            for (let i = 0; i < 26; i++) {
-                                // Create a new row every 3 columns
-                                document.write(`<td style = "width : 100px; border : 1px solid black;">${i+1}</td>`);
-                                document.write(`<td style = "width : 500px; border : 1px solid black;"">${plasma_list[i]}</td>`);
-                                document.write(`<td><input type= "number" style = "border : 1px solid black;" placeholder = "0" name = "plasma_${plasma_list[i]}"}></td>`);
-                                document.write(`<tr><tr>`);
-                            }
-                        </script>
+                        {% for i in range(length_plasma_list) %}
+                            <td style = "width : 100px; border : 1px solid black;">{{i+1}}</td>
+                            <td style = "width : 500px; border : 1px solid black;">{{plasma_list[i]}}</td>
+                            <td><input type= "number" style = "border : 1px solid black;" placeholder = "0" id = "plasma_{{loop.index0}}" name = "plasma_{{loop.index0}}"></td>
+                            <tr></tr>
+                        {% endfor %}
+                        
                     </table>
                     <table style = "border : 1px solid black; margin-left : 100px;">
                         <tr style = "border : 1px solid black;">
@@ -70,64 +42,35 @@
                             <th style = "border : 1px solid black;">Serum Metabolite Name</th>
                             <th style = "border : 1px solid black;">Concentration in counts</th>
                         </tr>
-                        <script>
-                            serum_list = ['cholesterol',
-                                'lactic acid',
-                                'N-methylalanine',
-                                'phenylalanine',
-                                'aspartic acid',
-                                'deoxypentitol',
-                                'glutamic acid',
-                                'malic acid',
-                                'phenol',
-                                'taurine']
-                            for (let i = 0; i < 10; i++) {
-                                // Create a new row every 3 columns
-                                document.write(`<td style = "width : 100px; border : 1px solid black;">${i+1}</td>`);
-                                document.write(`<td style = "width : 500px; border : 1px solid black;"">${serum_list[i]}</td>`);
-                                document.write(`<td><input type= "number" style = "border : 1px solid black;" placeholder = "0" name = "serum_${serum_list[i]}"}></td>`);
-                                document.write(`<tr><tr>`);
-                            }
-                        </script>
+                        {% for i in range(length_serum_list) %}
+                        <td style = "width : 100px; border : 1px solid black;">{{i+1}}</td>
+                        <td style = "width : 500px; border : 1px solid black;">{{serum_list[i]}}</td>
+                        <td><input type= "number" style = "border : 1px solid black;" placeholder = "0" id = "serum_{{loop.index0}}" name = "serum_{{loop.index0}}"></td>
+                        <tr></tr>
+                    {% endfor %}
                     </table>
                     </div>
+                    <input type = "button" onclick = "fillSampleData()" name = "fillSample" value = "Populate with Sample Data"> 
                 <input type = "submit" value = "Submit Metabolites data" style="margin-top : 50px; height : 50px; width : 250px; border-radius: 5px; background-color: skyblue; font-size : 18px;" >
             </form>
+            {% if dataInvalid == True %}
+            <h1>Data Submitted is invalid</h1>
+            {% endif %}
             </div>
             
                      
         </div>
         <script>
-            let slideIndex = 1;
-            showSlides(slideIndex);
-            
-            function plusSlides(n) {
-              showSlides(slideIndex += n);
-            }
-            
-            function currentSlide(n) {
-              showSlides(slideIndex = n);
-            }
-            
-            function showSlides(n) {
-              let i;
-              let slides = document.getElementsByClassName("mySlides");
-              let dots = document.getElementsByClassName("dot");
-              if (n > slides.length) {slideIndex = 1}    
-              if (n < 1) {slideIndex = slides.length}
-              for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
-              }
-              for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-              }
-              slides[slideIndex-1].style.display = "block";  
-              dots[slideIndex-1].className += " active";
-            }
-            
+            function fillSampleData(){
+                // obtain the sample plasma data
+                
+                for(let i=0;i<26;i++){
+
+                }
+            }    
   
 
-            </script>
+        </script>
             
     </body>
     

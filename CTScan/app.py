@@ -16,6 +16,43 @@ matplotlib.use('agg')
 
 app = Flask(__name__)
 
+plasma_list = ['asparagine',
+                'benzoic acid',
+                'tryptophan',
+                'uric acid',
+                '5-hydroxynorvaline NIST',
+                'alpha-ketoglutarate',
+                'citrulline',
+                'glutamine',
+                'hypoxanthine',
+                'malic acid',
+                'methionine sulfoxide',
+                'nornicotine',
+                'octadecanol',
+                '3-phosphoglycerate',
+                '5-methoxytryptamine',
+                'adenosine-5-monophosphate',
+                'aspartic acid',
+                'lactic acid',
+                'maltose',
+                'maltotriose',
+                'N-methylalanine',
+                'phenol',
+                'phosphoethanolamine',
+                'pyrophosphate',
+                'pyruvic acid',
+                'taurine']
+serum_list = ['cholesterol',
+            'lactic acid',
+            'N-methylalanine',
+            'phenylalanine',
+            'aspartic acid',
+            'deoxypentitol',
+            'glutamic acid',
+            'malic acid',
+            'phenol',
+            'taurine']
+
 #model = pickle.load(open("model.pkl", "rb"))
 #with open('plot.pickle', 'rb') as f:
     #plot = pickle.load(f)
@@ -97,8 +134,7 @@ def image():
 
 @app.route('/metaboliteanalysis' , methods=['GET', 'POST'])
 def metaboliteanalysis() : 
-    model = pickle.load(open("D:\GitHub\\4BIT\metabolites\models\plasma_ridge_model.pkl", "rb"))
-    return render_template('metabolite_analysis.html')
+    return render_template('metabolite_analysis.html' , plasma_list = plasma_list , length_plasma_list = len(plasma_list) , length_serum_list = len(serum_list) , serum_list = serum_list)
     
 
 @app.route('/upload_metabolite_data' , methods=['GET', 'POST'])
@@ -107,6 +143,14 @@ def metabolite() :
     data = request.form
     print('data : ', data)
     keys = data.keys()
+    # check if any of the key has a value less than or equal to 0
+    # then return an error message 
+    for key, value in data.items() : 
+        global plasma_list
+        global serum_list
+        if value == "" : 
+            # return error message 
+            return render_template("metabolite_analysis.html" , plasma_list = plasma_list , length_plasma_list = len(plasma_list) , length_serum_list = len(serum_list) , serum_list = serum_list , dataInvalid = True)
     print()
     print()
     print('keys : ' , keys)
