@@ -31,7 +31,11 @@
                         {% for i in range(length_plasma_list) %}
                             <td style = "width : 100px; border : 1px solid black;">{{i+1}}</td>
                             <td style = "width : 500px; border : 1px solid black;">{{plasma_list[i]}}</td>
-                            <td><input type= "number" style = "border : 1px solid black;" placeholder = "0" id = "plasma_{{loop.index0}}" name = "plasma_{{loop.index0}}"></td>
+                            {% if plasma_sample_data %}  
+                                <td><input type= "number" style = "border : 1px solid black;" placeholder = "0" id = "plasma_{{loop.index0}}" name = "plasma_{{loop.index0}}" value = "{{ plasma_sample_data[i] }}"></td>
+                            {% else %}
+                                <td><input type= "number" style = "border : 1px solid black;" placeholder = "0" id = "plasma_{{loop.index0}}" name = "plasma_{{loop.index0}}"></td>
+                            {% endif %}
                             <tr></tr>
                         {% endfor %}
                         
@@ -45,13 +49,19 @@
                         {% for i in range(length_serum_list) %}
                         <td style = "width : 100px; border : 1px solid black;">{{i+1}}</td>
                         <td style = "width : 500px; border : 1px solid black;">{{serum_list[i]}}</td>
-                        <td><input type= "number" style = "border : 1px solid black;" placeholder = "0" id = "serum_{{loop.index0}}" name = "serum_{{loop.index0}}"></td>
+                        {% if serum_sample_data %}
+                            <td><input type= "number" style = "border : 1px solid black;" placeholder = "0" id = "serum_{{loop.index0}}" name = "serum_{{loop.index0}}" value = "{{ serum_sample_data[i] }}"></td>
+                        {% else %}
+                            <td><input type= "number" style = "border : 1px solid black;" placeholder = "0" id = "serum_{{loop.index0}}" name = "serum_{{loop.index0}}"></td>
+                        {% endif %}
                         <tr></tr>
                     {% endfor %}
                     </table>
                     </div>
-                    <input type = "button" onclick = "fillSampleData()" name = "fillSample" value = "Populate with Sample Data"> 
                 <input type = "submit" value = "Submit Metabolites data" style="margin-top : 50px; height : 50px; width : 250px; border-radius: 5px; background-color: skyblue; font-size : 18px;" >
+            </form>
+            <form action="{{ url_for('fillSample') }}" method="POST" style = "display : flex; flex-direction: column; justify-content: space-between;align-items: center; margin-top : 50px;">
+                <input type = "submit"  name = "fillSample" onclick = "fillSampleData()" value = "Populate with Sample Data"> 
             </form>
             {% if dataInvalid == True %}
             <h1>Data Submitted is invalid</h1>
@@ -63,10 +73,7 @@
         <script>
             function fillSampleData(){
                 // obtain the sample plasma data
-                
-                for(let i=0;i<26;i++){
-
-                }
+                console.log('inside fill sample data')
             }    
   
 
