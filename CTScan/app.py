@@ -13,6 +13,7 @@ import cv2
 import pandas as pd
 import json
 import random
+from sklearn.preprocessing import StandardScaler, RobustScaler
 
 matplotlib.use('agg')
 
@@ -144,7 +145,6 @@ def metabolite() :
     print('inside upload metabolite data')
     data = request.form
     print('data : ', data)
-    keys = data.keys()
     # check if any of the key has a value less than or equal to 0
     # then return an error message 
     for key, value in data.items() : 
@@ -153,57 +153,60 @@ def metabolite() :
         if value == "" : 
             # return error message 
             return render_template("metabolite_analysis.html" , plasma_list = plasma_list , length_plasma_list = len(plasma_list) , length_serum_list = len(serum_list) , serum_list = serum_list , dataInvalid = True)
-    print()
-    print()
-    print('keys : ' , keys)
-
-    print('iteratinf over dict : ')
-    plasma_list = []
-    serum_list = []
-    flag = 0
-    for key, value in data.items() : 
-        if "plasma_" in key : 
-            plasma_list.append(value)
-        elif "serum_" in key : 
-            serum_list.append(value)
     
 
-    
+    print('data : ' , data)
     print()
-    print()
-    plasma_list = [item if item != '' else '0' for item in plasma_list]
-    serum_list = [item if item != '' else '0' for item in serum_list]
-    print('plasma_list : ' , plasma_list)
-    print('serum_list : ' , serum_list)
+    plasma_dict = {}
+    for i in range(len(plasma_list)) : 
+        index = f'plasma_{i}'
+        plasma_dict[plasma_list[i]] = data[index]
     
-    
-    plasma_list = np.asarray(plasma_list , dtype=float)
-    serum_list = np.asarray(serum_list , dtype = float)
+    print('plasma_dict : ' , plasma_dict)
 
-    # Cancer detection from plasma
-    plasma_ridge_model = pickle.load(open("D:\GitHub\\4BIT\metabolites\models\plasma_ridge_model.pkl", "rb"))
-    print('model : ' , plasma_ridge_model)
-    plasma_list = plasma_list.reshape(1,-1)
-    plasma_pred = plasma_ridge_model.predict(plasma_list)
-    print()
-    print()
-    print('plasma_pred : ' , plasma_pred)\
+    serum_dict = {}
+    for i in range(len(serum_list)) : 
+        index = f'serum_{i}'
+        serum_dict[serum_list[i]] = data[index]
     
-    # Cancer detection from Serum
-    serum__xgb_classifier = pickle.load(open("D:\GitHub\\4BIT\metabolites\models\serum_xgb_classifier.pkl", "rb"))
-    print('xgb model : ' , serum__xgb_classifier)
-    serum_list = serum_list.reshape(1,-1)
-    serum_pred = serum__xgb_classifier.predict(serum_list)
     print()
+    print('serum_dict : ' , serum_dict)
+
+    X_plasma_df = pd.DataFrame(plasma_dict , index = [0])
     print()
-    print('serum pred : ',  serum_pred)
+    print('X_plasma_df : ' , X_plasma_df)
+    print('length of X plasma df : ' , len(X_plasma_df.columns))
 
-    cancer_exists = "No"
-    if(serum_pred[0] or plasma_pred[0] == 1) : 
-        # lung cancer exists
-        cancer_exists = "Yes"
+    X_serum_df = pd.DataFrame(serum_dict , index = [0])
+    print()
+    print('X_serum_df : ' , X_serum_df)
 
-    return render_template('metabolite_results.html' , cancer_exists = cancer_exists)
+    # Preprocess the plasma and the Serum inputs 
+    # using MinMaxScaler
+    plasma =pd.read_csv("D:\GitHub\\4BIT\metabolites\dataset\plasma_processed.csv")
+    plasma.drop(['Unnamed: 0'], axis=1 , inplace = True)
+    plasma.drop(['Class'] , axis = 1 , inplace = True)
+    plasma = plasma.head()
+
+    min_values = plasma.min()
+    max_values = plasma.max()
+    plasma_min_max = {}
+    
+    
+
+    """
+    
+    scl = StandardScaler().fit(df0.iloc[:, :-1])
+    stand = scl.transform(df0.iloc[:, :-1])
+    # stand
+    df = pd.DataFrame(stand, columns = df0.columns[:-1])
+    df = pd.concat([df, df0.iloc[:, -1]], axis=1)
+    df
+        
+    """
+    
+
+    return render_template('metabolite_results.html' , cancer_exists = "Yes")
 
 
 @app.route('/fill_sample_data' , methods = ['GET' , 'POST'])
