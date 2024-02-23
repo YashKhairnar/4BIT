@@ -17,24 +17,23 @@
             </ul>
         </header>
 
-        <div class = "metabolite-result-container" style = "height : 900px; width : 1825px; margin-top : 10px; margin-left : 15px;background-color: gray; display : flex; flex-direction: column; justify-content: space-between; align-items: center;">
+        <div class = "metabolite-result-container" style = "height : 100%; width : 1825px; margin-top : 10px; margin-left : 15px;background-color: gray; display : flex; flex-direction: column; justify-content: space-between; align-items: center;">
             <div class = "display-metabolite-result-report" style = "margin-top : 10px;">
                 <h3>Lung Cancer Detected : {{cancer_exists}}</h3>
                 <!-- link to classification report html file -->
+                <br>
                 <a type = "button" href = "D:\GitHub\4BIT\metabolites\final and best approach\Approach 1\classification_report.html">View Classification Report</a>
             </div>
-            <div class = "cluster-maps-metabolites" style = "display : flex; flex-direction: row; justify-content: space-between; align-items: center;" >
-                <img src = "{{url_for('static' , filename='metabolites_viz\clustermap_plasma_final.jpg')}}" alt = "clustermap plasma" style = "height : 500px; width : 500px;">
-                <img src = "{{url_for('static' , filename='metabolites_viz\clustermap_serum_final.jpg')}}" alt = "clustermap serum">
+            <div class = "cluster-maps-metabolites" style = "display : flex; flex-direction: row; justify-content: space-between; align-items: center; padding-top : 50px;" >
+                <img src = "{{url_for('static' , filename='metabolites_viz/clustermap_plasma_final.jpg')}}" alt = "clustermap plasma" style = "height : 750px; width : 750px; padding-right: 75px;">
+                <img src = "{{url_for('static' , filename='metabolites_viz/clustermap_serum_final.jpg')}}" alt = "clustermap serum" style = "height : 750px; width : 750px; padding-left : 75px">
             </div> 
-            <div class = "importance-metabolites" style = "display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                <img src = "{{url_for('static' , filename='metabolites_viz\importance_plasma.jpg')}}" alt = "importance plasma"> 
-                <img src = "{{url_for('static' , filename='metabolites_viz\importance_serum.jpg')}}" alt = "importance serum">
+            <div class = "importance-metabolites" style = "display: flex; flex-direction: row; justify-content: space-between; align-items: center; padding-top : 50px;">
+                <img src = "{{url_for('static' , filename='metabolites_viz/importance_plasma.jpg')}}" alt = "importance plasma" style = "height : 400px; width : 500px; padding-right: 175px;"> 
+                <img src = "{{url_for('static' , filename='metabolites_viz/importance_serum.jpg')}}" alt = "importance serum" style = "height : 400px; width : 500px; padding-left: 175px;">
             </div>
             
         </div>
-
-        
             
     </body>
     
