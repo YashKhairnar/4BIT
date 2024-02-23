@@ -13,7 +13,6 @@ import cv2
 import pandas as pd
 import json
 import random
-from sklearn.preprocessing import StandardScaler, RobustScaler
 
 matplotlib.use('agg')
 
@@ -154,59 +153,63 @@ def metabolite() :
             # return error message 
             return render_template("metabolite_analysis.html" , plasma_list = plasma_list , length_plasma_list = len(plasma_list) , length_serum_list = len(serum_list) , serum_list = serum_list , dataInvalid = True)
     
-
-    print('data : ' , data)
-    print()
     plasma_dict = {}
     for i in range(len(plasma_list)) : 
         index = f'plasma_{i}'
         plasma_dict[plasma_list[i]] = data[index]
-    
-    print('plasma_dict : ' , plasma_dict)
 
     serum_dict = {}
     for i in range(len(serum_list)) : 
         index = f'serum_{i}'
         serum_dict[serum_list[i]] = data[index]
-    
-    print()
-    print('serum_dict : ' , serum_dict)
 
-    X_plasma_df = pd.DataFrame(plasma_dict , index = [0])
-    print()
-    print('X_plasma_df : ' , X_plasma_df)
-    print('length of X plasma df : ' , len(X_plasma_df.columns))
-
-    X_serum_df = pd.DataFrame(serum_dict , index = [0])
-    print()
-    print('X_serum_df : ' , X_serum_df)
-
-    # Preprocess the plasma and the Serum inputs 
-    # using MinMaxScaler
+    # Scale Plasma Inputs
     plasma =pd.read_csv("D:\GitHub\\4BIT\metabolites\dataset\plasma_processed.csv")
     plasma.drop(['Unnamed: 0'], axis=1 , inplace = True)
     plasma.drop(['Class'] , axis = 1 , inplace = True)
     plasma = plasma.head()
-
     min_values = plasma.min()
     max_values = plasma.max()
     plasma_min_max = {}
+    for item in plasma_list : 
+        plasma_min_max[item] = max_values[item] - min_values[item]
     
-    
+    scaled_plasma = {}
+    for key, value in plasma_min_max.items() : 
+        scaled_plasma[key] = int(plasma_dict[key])/value
 
-    """
-    
-    scl = StandardScaler().fit(df0.iloc[:, :-1])
-    stand = scl.transform(df0.iloc[:, :-1])
-    # stand
-    df = pd.DataFrame(stand, columns = df0.columns[:-1])
-    df = pd.concat([df, df0.iloc[:, -1]], axis=1)
-    df
-        
-    """
-    
+    scaled_plasma_df = pd.DataFrame(scaled_plasma , index = [0])
 
-    return render_template('metabolite_results.html' , cancer_exists = "Yes")
+    # Scale Serum Inputs
+    serum =pd.read_csv("D:\GitHub\\4BIT\metabolites\dataset\serum_processed.csv")
+    serum.drop(['Unnamed: 0'], axis=1 , inplace = True)
+    serum.drop(['Class'] , axis = 1 , inplace = True)
+    serum = serum.head()
+    min_values = serum.min()
+    max_values = serum.max()
+    serum_min_max = {}
+    for item in serum_list : 
+        serum_min_max[item] = max_values[item] - min_values[item]
+
+    scaled_serum = {}
+    for key, value in serum_min_max.items() : 
+        scaled_serum[key] = int(serum_dict[key])/value
+
+    scaled_serum_df = pd.DataFrame(scaled_serum , index = [0])
+
+    model1 = pickle.load(open("D:\\GitHub\\4BIT\\metabolites\\models\\plasma_ridge_model.pkl", "rb"))
+    y_pred1 = model1.predict(scaled_plasma_df)
+    print('y pred 1 : ' , y_pred1)
+
+    model2 = pickle.load(open("D:\\GitHub\\4BIT\\metabolites\\models\\serum_xgb_classifier.pkl" , "rb"))
+    y_pred2 = model2.predict(scaled_serum_df)
+    print('y_pred 2 : ' , y_pred2)
+
+    cancer_exists = "No"
+    if(y_pred1[0]==0 or y_pred2[0]==0) :
+        cancer_exists = "Yes"
+
+    return render_template('metabolite_results.html' , cancer_exists = cancer_exists)
 
 
 @app.route('/fill_sample_data' , methods = ['GET' , 'POST'])
