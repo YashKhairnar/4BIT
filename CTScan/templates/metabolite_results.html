@@ -3,21 +3,25 @@
     <head>
         <link rel="stylesheet" href="{{url_for('static',filename='css/predictive analysis.css')}}">
         <link rel="stylesheet" href="{{url_for('static',filename='css/base.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="{{url_for('static',filename='css/preview.js')}}"></script>
 
     </head>
-    <body>
+    <body style = "color:#ffffff; background-color: #000;">
         <header class="nav">
             <a href="#" id="icon"><img src="/static/images/iconlung.png"></a>
             <ul class="navlinks">
                 <li><a href="{{ url_for('base') }}">Home</a></li>
+                <i class="fa-solid fa-circle fa-2xs" style = "color : rebeccapurple;"></i>
                 <li><a href="{{ url_for('predictiveanalysis') }}">Predictive Analysis</a></li>
+                <i class="fa-solid fa-circle fa-2xs" style = "color : rebeccapurple;"></i>
                 <li><a href="{{ url_for('metaboliteanalysis') }}">Metabolite Analysis</a></li>
+                <i class="fa-solid fa-circle fa-2xs" style = "color : rebeccapurple;"></i>
                 <li><a href="{{ url_for('about') }}">About</a></li>
             </ul>
         </header>
 
-        <div class = "metabolite-result-container" style = "height : 100%; width : 1825px; margin-top : 10px; margin-left : 15px;background-color: gray; display : flex; flex-direction: column; justify-content: space-between; align-items: center;">
+        <div class = "metabolite-result-container" style = "height : 100%; width : 1825px; margin-top : 10px; margin-left : 15px;background-color: black; display : flex; flex-direction: column; justify-content: space-between; align-items: center;">
             <div class = "display-metabolite-result-report" style = "margin-top : 10px;">
                 <h3>Lung Cancer Detected : {{cancer_exists}}</h3>
                 <!-- link to classification report html file -->

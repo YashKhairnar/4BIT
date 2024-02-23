@@ -3,65 +3,69 @@
     <head>
         <link rel="stylesheet" href="{{url_for('static',filename='css/predictive analysis.css')}}">
         <link rel="stylesheet" href="{{url_for('static',filename='css/base.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <script src="{{url_for('static',filename='css/preview.js')}}"></script>
 
     </head>
-    <body>
+    <body style = "color : #ffffff;">
         <header class="nav">
             <a href="#" id="icon"><img src="/static/images/iconlung.png"></a>
             <ul class="navlinks">
                 <li><a href="{{ url_for('base') }}">Home</a></li>
+                <i class="fa-solid fa-circle fa-2xs" style = "color : rebeccapurple;"></i>
                 <li><a href="{{ url_for('predictiveanalysis') }}">Predictive Analysis</a></li>
+                <i class="fa-solid fa-circle fa-2xs" style = "color : rebeccapurple;"></i>
                 <li><a href="{{ url_for('metaboliteanalysis') }}">Metabolite Analysis</a></li>
+                <i class="fa-solid fa-circle fa-2xs" style = "color : rebeccapurple;"></i>
                 <li><a href="{{ url_for('about') }}">About</a></li>
             </ul>
         </header>
         <div class="table-container" style = "margin-top : 20px; height : 1000px; width : 100%">        
             
-            <div class = "column-left" style = "background-color : skyblue ;height : 1200px; width : 100%; overflow-y: scroll; margin-top : -20px;">
+            <div class = "column-left" style = "background-color : #000;height : 1200px; width : 100%; overflow-y: scroll; margin-top : -20px;">
                 <!-- display the table here -->
                 <form action="{{ url_for('metabolite') }}" method="POST" style = "display : flex; flex-direction: column; justify-content: space-between;align-items: center; margin-top : 50px;">
                     <div class = "table-container-2" style = "display : flex; flex-direction : row; justify-content: space-between; align-items: center;">
-                    <table style = "border : 1px solid black;">
-                        <tr style = "border : 1px solid black;">
-                            <th style = "border : 1px solid black;">Sr.no</th>
-                            <th style = "border : 1px solid black;">Plasma Metabolite Name</th>
-                            <th style = "border : 1px solid black;">Concentration in counts</th>
+                    <table style = "border : 1px solid white;">
+                        <tr style = "border : 1px solid white;">
+                            <th style = "border : 1px solid white;">Sr.no</th>
+                            <th style = "border : 1px solid white;">Plasma Metabolite Name</th>
+                            <th style = "border : 1px solid white;">Concentration in counts</th>
                         </tr>
                         {% for i in range(length_plasma_list) %}
-                            <td style = "width : 100px; border : 1px solid black;">{{i+1}}</td>
-                            <td style = "width : 500px; border : 1px solid black;">{{plasma_list[i]}}</td>
+                            <td style = "width : 100px; border : 1px solid white;">{{i+1}}</td>
+                            <td style = "width : 500px; border : 1px solid white;">{{plasma_list[i]}}</td>
                             {% if plasma_sample_data %}  
-                                <td><input type= "number" style = "border : 1px solid black;" placeholder = "0" id = "plasma_{{loop.index0}}" name = "plasma_{{loop.index0}}" value = "{{ plasma_sample_data[i] }}"></td>
+                                <td><input type= "number" style = "border : 1px solid white;" placeholder = "0" id = "plasma_{{loop.index0}}" name = "plasma_{{loop.index0}}" value = "{{ plasma_sample_data[i] }}"></td>
                             {% else %}
-                                <td><input type= "number" style = "border : 1px solid black;" placeholder = "0" id = "plasma_{{loop.index0}}" name = "plasma_{{loop.index0}}"></td>
+                                <td><input type= "number" style = "border : 1px solid white;" placeholder = "0" id = "plasma_{{loop.index0}}" name = "plasma_{{loop.index0}}"></td>
                             {% endif %}
                             <tr></tr>
                         {% endfor %}
                         
                     </table>
-                    <table style = "border : 1px solid black; margin-left : 100px;">
-                        <tr style = "border : 1px solid black;">
-                            <th style = "border : 1px solid black;">Sr.no</th>
-                            <th style = "border : 1px solid black;">Serum Metabolite Name</th>
-                            <th style = "border : 1px solid black;">Concentration in counts</th>
+                    <table style = "border : 1px solid white; margin-left : 100px; margin-top : -380px;">
+                        <tr style = "border : 1px solid white;">
+                            <th style = "border : 1px solid white;">Sr.no</th>
+                            <th style = "border : 1px solid white;">Serum Metabolite Name</th>
+                            <th style = "border : 1px solid white;">Concentration in counts</th>
                         </tr>
                         {% for i in range(length_serum_list) %}
-                        <td style = "width : 100px; border : 1px solid black;">{{i+1}}</td>
-                        <td style = "width : 500px; border : 1px solid black;">{{serum_list[i]}}</td>
+                        <td style = "width : 100px; border : 1px solid white;">{{i+1}}</td>
+                        <td style = "width : 500px; border : 1px solid white;">{{serum_list[i]}}</td>
                         {% if serum_sample_data %}
-                            <td><input type= "number" style = "border : 1px solid black;" placeholder = "0" id = "serum_{{loop.index0}}" name = "serum_{{loop.index0}}" value = "{{ serum_sample_data[i] }}"></td>
+                            <td><input type= "number" style = "border : 1px solid white;" placeholder = "0" id = "serum_{{loop.index0}}" name = "serum_{{loop.index0}}" value = "{{ serum_sample_data[i] }}"></td>
                         {% else %}
-                            <td><input type= "number" style = "border : 1px solid black;" placeholder = "0" id = "serum_{{loop.index0}}" name = "serum_{{loop.index0}}"></td>
+                            <td><input type= "number" style = "border : 1px solid white;" placeholder = "0" id = "serum_{{loop.index0}}" name = "serum_{{loop.index0}}"></td>
                         {% endif %}
                         <tr></tr>
                     {% endfor %}
                     </table>
                     </div>
-                <input type = "submit" value = "Submit Metabolites data" style="margin-top : 50px; height : 50px; width : 250px; border-radius: 5px; background-color: skyblue; font-size : 18px;" >
+                <input type = "submit" value = "Submit Metabolites data" style="color : white; font-weight: 500; position : absolute; top : 525px; right : 400px;margin-top : 50px; height : 50px; width : 250px; border-radius: 5px; background-color: rebeccapurple; font-size : 18px;" >
             </form>
-            <form action="{{ url_for('fillSample') }}" method="POST" style = "display : flex; flex-direction: column; justify-content: space-between;align-items: center; margin-top : 50px;">
-                <input type = "submit"  name = "fillSample" onclick = "fillSampleData()" value = "Populate with Sample Data"> 
+            <form action="{{ url_for('fillSample') }}" method="POST" style = "position : absolute; top : 500px; right : 400px;">
+                <input type = "submit"  name = "fillSample" onclick = "fillSampleData()" value = "Populate with Sample Data" style = "color : white; height : 50px; width : 250px; border-radius: 5px; background-color: rebeccapurple; font-size : 15px;"> 
             </form>
             {% if dataInvalid == True %}
             <h1>Data Submitted is invalid</h1>

@@ -9,7 +9,8 @@
 }
 
 .nav{
-    background-color: gray;
+    background-color: #000;
+    color : #ffffff;
     height : 10px;
 }
 header{
@@ -37,8 +38,7 @@ header{
 }
 .navlinks li a{
     text-decoration: none;
-    color: black;
-    
+    color: #ffffff;
     font-size: 20px;
 }
 .navlinks ul li::after{
