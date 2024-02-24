@@ -244,5 +244,6 @@ def fillSample() :
     
     return render_template("metabolite_analysis.html" , plasma_list = plasma_list , length_plasma_list = len(plasma_list) , length_serum_list = len(serum_list) , serum_list = serum_list , plasma_sample_data = plasma_sample_data , serum_sample_data = serum_sample_data)
 
+
 if __name__ == '__main__':
     app.run(debug=True)
