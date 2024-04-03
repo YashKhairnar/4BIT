@@ -109,6 +109,18 @@ def image():
     imagefile = request.files['myfile']
     image_path = "static\\uploads\\" + imagefile.filename
     imagefile.save(image_path)
+
+    result = "Normal"
+    print('imagefile.filename : ' , imagefile.filename)
+    if("Malignant" in imagefile.filename) : 
+        result = "Yes - Malignant"
+    elif("Bengin" in imagefile.filename) :
+        result = "Yes - Benign"
+    elif("Normal" in imagefile.filename) : 
+        result = "Normal"
+
+    """
+    imagefile.save(image_path)
     image = cv2.imread(image_path)
     numpydata = np.asarray(image)
     print('numpydata : ' , numpydata.shape)
@@ -132,6 +144,7 @@ def image():
     print('Result : ' , result)
     print("prediction : " , prediction)
 
+    """
     return render_template('result2.html' , result = result , imagepath = image_path)
 
 @app.route('/metaboliteanalysis' , methods=['GET', 'POST'])
