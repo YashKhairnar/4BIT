@@ -3,6 +3,7 @@ from matplotlib import pyplot as plt
 import matplotlib
 from matplotlib.backend_bases import FigureCanvasBase
 from flask import Flask, jsonify, render_template, request, send_file
+from sklearn.preprocessing import StandardScaler
 
 import tensorflow as tf
 from tensorflow import keras
@@ -169,14 +170,22 @@ def metabolite() :
     plasma_dict = {}
     for i in range(len(plasma_list)) : 
         index = f'plasma_{i}'
-        plasma_dict[plasma_list[i]] = data[index]
+        plasma_dict[plasma_list[i]] = float(data[index])
+    
+    print('plasma dict : ')
+    print(plasma_dict)
 
     serum_dict = {}
     for i in range(len(serum_list)) : 
         index = f'serum_{i}'
-        serum_dict[serum_list[i]] = data[index]
+        serum_dict[serum_list[i]] = float(data[index])
+    
+    print('serum dict : ')
+    print(serum_dict)
+
 
     # Scale Plasma Inputs
+    """
     plasma =pd.read_csv("D:\GitHub\\4BIT\metabolites\dataset\plasma_processed.csv")
     plasma.drop(['Unnamed: 0'], axis=1 , inplace = True)
     plasma.drop(['Class'] , axis = 1 , inplace = True)
@@ -209,17 +218,43 @@ def metabolite() :
         scaled_serum[key] = int(serum_dict[key])/value
 
     scaled_serum_df = pd.DataFrame(scaled_serum , index = [0])
+    """
 
-    model1 = pickle.load(open("D:\\GitHub\\4BIT\\metabolites\\models\\plasma_ridge_model.pkl", "rb"))
-    y_pred1 = model1.predict(scaled_plasma_df)
+    # converting the dict to pandas dataframe 
+    plasma_df = pd.DataFrame(list(plasma_dict.items()), columns=['Metabolite', 'Value'])
+    serum_df = pd.DataFrame(list(serum_dict.items()), columns=['Metabolite', 'Value'])
+
+    # applying standard scaler on the plasma and serum model 
+    scaler = StandardScaler()
+    plasma_df['scaled_value'] = scaler.fit_transform(plasma_df[['Value']])
+    print('plasma df scaled : ')
+    print(plasma_df)
+    serum_df['scaled_value'] = scaler.fit_transform(serum_df[['Value']])
+    print('scaled serum df : ')
+    print(serum_df)
+
+    # Prepare the input data for prediction
+    plasma_input_data = plasma_df['scaled_value'].values.reshape(1, -1)  # Reshape to match model input shape
+    serum_input_data = serum_df['scaled_value'].values.reshape(1, -1)
+
+    print('plasma_input_data : ' , plasma_input_data)
+    print('serum_input_data : ' , serum_input_data)
+    print('reshaping done')
+
+
+    cnn_model1 = load_model('D:\\GitHub\\4BIT\\metabolites\\CNN_models\\plasma_best_model.h5')
+    print('plasma_input_value : ' , plasma_input_data)
+    y_pred1 = cnn_model1.predict(plasma_input_data)
     print('y pred 1 : ' , y_pred1)
 
-    model2 = pickle.load(open("D:\\GitHub\\4BIT\\metabolites\\models\\serum_xgb_classifier.pkl" , "rb"))
-    y_pred2 = model2.predict(scaled_serum_df)
+    cnn_model2 = load_model('D:\\GitHub\\4BIT\\metabolites\\CNN_models\\serum_best_model.h5')
+    print('serum_input_value : ' , serum_input_data)
+    y_pred2 = cnn_model2.predict(serum_input_data)
     print('y_pred 2 : ' , y_pred2)
 
+    # Adding a threshold
     cancer_exists = "No"
-    if(y_pred1[0]==0 or y_pred2[0]==0) :
+    if(y_pred1[0]<=0.5 or y_pred2[0]<=0.5) :
         cancer_exists = "Yes"
 
     return render_template('metabolite_results.html' , cancer_exists = cancer_exists)
